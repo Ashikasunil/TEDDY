@@ -1,3 +1,133 @@
+# Imports
+import streamlit as st
+import pandas as pd
+import matplotlib.pyplot as plt
+import extended_features  # if you're using the extra module
+# Any other libraries...
+
+# ✅ This must be the VERY FIRST Streamlit command
+st.set_page_config(page_title="Mental Health Assistant", layout="centered")
+
+# All other Streamlit UI logic starts AFTER this
+st.sidebar.title("🧭 Navigation")
+app_mode = st.sidebar.radio("Choose a section", [
+    "Home",
+    "Chatbot + Sentiment",
+    "Mood Timeline",
+    "Chat History",
+    "Survey Analysis",
+    "🎯 Extended Features"
+])
+
+# Your conditional logic to show content
+if app_mode == "Home":
+    st.title("🏠 Welcome to the Mental Health Assistant")
+    st.write("Select a feature from the sidebar to begin.")
+
+elif app_mode == "🎯 Extended Features":
+    import extended_features
+
+# app.py
+
+# Standard imports
+import streamlit as st
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from datetime import datetime
+import extended_features  # If you have this module
+
+# ✅ IMPORTANT: Must be the FIRST Streamlit command
+st.set_page_config(
+    page_title="Mental Health Assistant",
+    layout="centered",
+    initial_sidebar_state="expanded"
+)
+
+# Now continue with your Streamlit layout
+st.sidebar.title("🧭 Navigation")
+app_mode = st.sidebar.radio("Choose a section", [
+    "Home",
+    "Chatbot + Sentiment",
+    "Mood Timeline",
+    "Chat History",
+    "Survey Analysis",
+    "🎯 Extended Features"
+])
+
+import streamlit as st  # ✅ This must be first
+st.set_page_config(page_title="Mental Health Assistant", layout="centered")  # ✅ This must be second
+
+# Other imports come after
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import datetime
+import extended_features  # Optional, only if you have this module
+
+st.sidebar.title("🧭 Navigation")
+app_mode = st.sidebar.radio("Choose a section", [...])
+# ✅ Nothing before this
+import streamlit as st
+
+# ✅ Page config must be right after the first import
+st.set_page_config(page_title="Mental Health Assistant", layout="centered")
+
+# ✅ Then continue with other imports
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from datetime import datetime
+import extended_features  # Only if this does NOT call st.* immediately
+
+# ✅ Streamlit UI begins here
+st.sidebar.title("🧭 Navigation")
+app_mode = st.sidebar.radio("Choose a section", [
+    "Home",
+    "Chatbot + Sentiment",
+    "Mood Timeline",
+    "Chat History",
+    "Survey Analysis",
+    "🎯 Extended Features"
+])
+def show_extended_features():
+    st.write("Here's something cool!")
+# ✅ Nothing should come before this
+import streamlit as st
+
+# ✅ Must be the FIRST Streamlit command
+st.set_page_config(
+    page_title="Mental Health Assistant",
+    layout="centered",
+    initial_sidebar_state="expanded"
+)
+
+# ✅ Now safe to import other libraries
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from datetime import datetime
+import os
+import base64
+from wordcloud import WordCloud
+from transformers import pipeline
+
+# ✅ Safe to import custom modules if they don’t use Streamlit at the top-level
+try:
+    import extended_features  # Make sure this does not run st.* directly on import
+except:
+    st.warning("Extended features module not loaded")
+
+# ✅ Streamlit UI starts here
+st.sidebar.title("🧭 Navigation")
+app_mode = st.sidebar.radio("Choose a section", [
+    "Home",
+    "Chatbot + Sentiment",
+    "Mood Timeline",
+    "Chat History",
+    "Survey Analysis",
+    "🎯 Extended Features"
+])
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
