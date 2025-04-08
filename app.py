@@ -158,9 +158,15 @@ elif app_mode == "Survey Analysis":
             st.image(wc.to_array())
 
 elif app_mode == "🎯 Extended Features":
+    import extended_features
+    extended_features.run()
+
+elif app_mode == "🎯 Extended Features":
     st.title("✨ Extended Features")
     if extended_features:
         extended_features.show_extended_features()
     else:
         st.warning("Extended features module not found.")
+
+
 
