@@ -1,194 +1,25 @@
-# Imports
+pip install matplotlib wordcloud seaborn textblob scikit-learn
+# Must be the first Streamlit command
 import streamlit as st
-import pandas as pd
-import matplotlib.pyplot as plt
-import extended_features  # if you're using the extra module
-# Any other libraries...
-
-# ✅ This must be the VERY FIRST Streamlit command
 st.set_page_config(page_title="Mental Health Assistant", layout="centered")
 
-# All other Streamlit UI logic starts AFTER this
-st.sidebar.title("🧭 Navigation")
-app_mode = st.sidebar.radio("Choose a section", [
-    "Home",
-    "Chatbot + Sentiment",
-    "Mood Timeline",
-    "Chat History",
-    "Survey Analysis",
-    "🎯 Extended Features"
-])
-
-# Your conditional logic to show content
-if app_mode == "Home":
-    st.title("🏠 Welcome to the Mental Health Assistant")
-    st.write("Select a feature from the sidebar to begin.")
-
-elif app_mode == "🎯 Extended Features":
-    import extended_features
-
-# app.py
-
-# Standard imports
-import streamlit as st
+# Other imports
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
 from datetime import datetime
-import extended_features  # If you have this module
-
-# ✅ IMPORTANT: Must be the FIRST Streamlit command
-st.set_page_config(
-    page_title="Mental Health Assistant",
-    layout="centered",
-    initial_sidebar_state="expanded"
-)
-
-# Now continue with your Streamlit layout
-st.sidebar.title("🧭 Navigation")
-app_mode = st.sidebar.radio("Choose a section", [
-    "Home",
-    "Chatbot + Sentiment",
-    "Mood Timeline",
-    "Chat History",
-    "Survey Analysis",
-    "🎯 Extended Features"
-])
-
-import streamlit as st  # ✅ This must be first
-st.set_page_config(page_title="Mental Health Assistant", layout="centered")  # ✅ This must be second
-
-# Other imports come after
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import datetime
-import extended_features  # Optional, only if you have this module
-
-st.sidebar.title("🧭 Navigation")
-app_mode = st.sidebar.radio("Choose a section", [...])
-# ✅ Nothing before this
-import streamlit as st
-
-# ✅ Page config must be right after the first import
-st.set_page_config(page_title="Mental Health Assistant", layout="centered")
-
-# ✅ Then continue with other imports
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-from datetime import datetime
-import extended_features  # Only if this does NOT call st.* immediately
-
-# ✅ Streamlit UI begins here
-st.sidebar.title("🧭 Navigation")
-app_mode = st.sidebar.radio("Choose a section", [
-    "Home",
-    "Chatbot + Sentiment",
-    "Mood Timeline",
-    "Chat History",
-    "Survey Analysis",
-    "🎯 Extended Features"
-])
-def show_extended_features():
-    st.write("Here's something cool!")
-# ✅ Nothing should come before this
-import streamlit as st
-
-# ✅ Must be the FIRST Streamlit command
-st.set_page_config(
-    page_title="Mental Health Assistant",
-    layout="centered",
-    initial_sidebar_state="expanded"
-)
-
-# ✅ Now safe to import other libraries
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-from datetime import datetime
-import os
-import base64
-from wordcloud import WordCloud
-from transformers import pipeline
-
-# ✅ Safe to import custom modules if they don’t use Streamlit at the top-level
-try:
-    import extended_features  # Make sure this does not run st.* directly on import
-except:
-    st.warning("Extended features module not loaded")
-
-# ✅ Streamlit UI starts here
-st.sidebar.title("🧭 Navigation")
-app_mode = st.sidebar.radio("Choose a section", [
-    "Home",
-    "Chatbot + Sentiment",
-    "Mood Timeline",
-    "Chat History",
-    "Survey Analysis",
-    "🎯 Extended Features"
-])
-import streamlit as st
-import pandas as pd
-import matplotlib.pyplot as plt
-# (other imports...)
-
-# ✅ This must be FIRST
-st.set_page_config(page_title="Mental Health Assistant", layout="centered")
-
-# Then your Streamlit UI setup
-st.sidebar.title("🧭 Navigation")
-app_mode = st.sidebar.radio("Choose a section", [...])
-import streamlit as st
-
-# Sidebar Navigation
-st.sidebar.title("🧭 Navigation")
-app_mode = st.sidebar.radio("Choose a section", [
-    "Home",
-    "Chatbot + Sentiment",
-    "Mood Timeline",
-    "Chat History",
-    "Survey Analysis",
-    "🎯 Extended Features"
-])
-
-# Sections
-if app_mode == "Home":
-    st.title("🏠 Welcome to the Mental Health Assistant")
-    st.write("Select a feature from the sidebar to begin.")
-
-elif app_mode == "Chatbot + Sentiment":
-    st.title("💬 Chatbot and Sentiment Analysis")
-    # Add your chatbot code here (or import a file)
-
-elif app_mode == "Mood Timeline":
-    st.title("📈 Mood Timeline Visualization")
-    # Add timeline code or placeholder
-    st.info("Mood timeline feature under construction.")
-
-elif app_mode == "Chat History":
-    st.title("📜 Chat History Log")
-    # Add chat history code or placeholder
-    st.info("Chat history feature coming soon.")
-
-elif app_mode == "Survey Analysis":
-    st.title("📊 Survey Results")
-    # Add your Google Form data analysis code
-    st.info("Survey analysis not yet implemented.")
-
-elif app_mode == "🎯 Extended Features":
-    import extended_features  # This imports your added module
-
-import streamlit as st
-from textblob import TextBlob
-import random
-import pandas as pd
-from datetime import datetime
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.linear_model import LogisticRegression
 import matplotlib.pyplot as plt
 import seaborn as sns
 from wordcloud import WordCloud
+from textblob import TextBlob
+import random
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.linear_model import LogisticRegression
+
+# Optional import (if exists)
+try:
+    import extended_features
+except:
+    extended_features = None
 
 # --- Intent Model Setup ---
 intent_data = {
@@ -201,12 +32,13 @@ intent_data = {
         "sadness", "sadness", "stress", "greeting"
     ]
 }
-df = pd.DataFrame(intent_data)
+df_intent = pd.DataFrame(intent_data)
 vectorizer = TfidfVectorizer()
-X = vectorizer.fit_transform(df['text'])
+X = vectorizer.fit_transform(df_intent['text'])
 clf = LogisticRegression()
-clf.fit(X, df['intent'])
+clf.fit(X, df_intent['intent'])
 
+# Responses & Recommendations
 responses = {
     "greeting": ["Hi there! How can I support you today?"],
     "stress": ["Stress is tough. Let’s take a deep breath together."],
@@ -214,7 +46,6 @@ responses = {
     "sadness": ["I’m sorry you feel this way. Want to talk more about it?"],
     "default": ["Tell me more, I'm listening."]
 }
-
 recommendations = {
     "stress": [
         {"title": "5-Minute Meditation", "url": "https://www.youtube.com/watch?v=inpok4MKVLM"},
@@ -232,7 +63,6 @@ recommendations = {
         {"title": "Mental Health Playlist", "url": "https://www.youtube.com/playlist?list=PLFzWFredxyJlR9L1_LPODw_JH6XkUnYVX"}
     ]
 }
-
 crisis_keywords = ["suicide", "kill myself", "end it", "hopeless", "give up"]
 log_data = []
 
@@ -246,12 +76,10 @@ def get_sentiment(text):
     else:
         return "NEUTRAL", polarity
 
-# Function to process input
 def process_input(text):
     label, score = get_sentiment(text)
     if any(word in text.lower() for word in crisis_keywords):
         return "[⚠️ Crisis Detected] Please seek immediate help.", "Crisis"
-
     input_vec = vectorizer.transform([text])
     intent = clf.predict(input_vec)[0] if clf.predict_proba(input_vec).max() > 0.4 else "default"
     response = random.choice(responses[intent])
@@ -265,28 +93,33 @@ def process_input(text):
     })
     return f"[{label}] {response}", intent
 
-# --- Streamlit Interface ---
-st.set_page_config(page_title="Mental Health Assistant", layout="centered")
-st.title("🧠 Personalized Mental Health Assistant")
+# --- Streamlit App UI ---
+st.sidebar.title("🧭 Navigation")
+app_mode = st.sidebar.radio("Choose a section", [
+    "Home",
+    "Chatbot + Sentiment",
+    "Mood Timeline",
+    "Chat History",
+    "Survey Analysis",
+    "🎯 Extended Features"
+])
 
-user_input = st.text_input("How are you feeling today?")
-if user_input:
-    output, intent = process_input(user_input)
-    st.markdown(f"**Bot:** {output}")
+if app_mode == "Home":
+    st.title("🏠 Welcome to the Mental Health Assistant")
+    st.write("Select a feature from the sidebar to begin your personalized mental wellness journey.")
 
-    st.subheader("🎯 Personalized Recommendations")
-    for rec in recommendations.get(intent, recommendations["default"]):
-        st.markdown(f"- [{rec['title']}]({rec['url']})")
+elif app_mode == "Chatbot + Sentiment":
+    st.title("💬 Chatbot and Sentiment Analysis")
+    user_input = st.text_input("How are you feeling today?")
+    if user_input:
+        output, intent = process_input(user_input)
+        st.markdown(f"**Bot:** {output}")
+        st.subheader("🎯 Personalized Recommendations")
+        for rec in recommendations.get(intent, recommendations["default"]):
+            st.markdown(f"- [{rec['title']}]({rec['url']})")
 
-# Chat History
-if st.checkbox("📜 Show Chat History"):
-    if log_data:
-        st.dataframe(pd.DataFrame(log_data))
-    else:
-        st.info("No conversation history yet.")
-
-# Mood Timeline
-if st.checkbox("📈 Show Mood Timeline"):
+elif app_mode == "Mood Timeline":
+    st.title("📈 Mood Timeline Visualization")
     if log_data:
         df_log = pd.DataFrame(log_data)
         df_log["sentiment_num"] = df_log["sentiment"].map({
@@ -298,25 +131,36 @@ if st.checkbox("📈 Show Mood Timeline"):
     else:
         st.info("Start chatting to see your mood timeline.")
 
-# Survey Data Analysis
-st.header("📊 Survey Data Analysis")
-survey_file = st.file_uploader("Upload your Google Form survey CSV", type="csv")
+elif app_mode == "Chat History":
+    st.title("📜 Chat History Log")
+    if log_data:
+        st.dataframe(pd.DataFrame(log_data))
+    else:
+        st.info("No conversation history yet.")
 
-if survey_file is not None:
-    survey_df = pd.read_csv(survey_file)
-    st.write("📝 Survey Preview", survey_df.head())
+elif app_mode == "Survey Analysis":
+    st.title("📊 Survey Data Analysis")
+    survey_file = st.file_uploader("Upload your Google Form survey CSV", type="csv")
+    if survey_file:
+        survey_df = pd.read_csv(survey_file)
+        st.write("📝 Survey Preview", survey_df.head())
+        if "Rate your overall mood (1–5)" in survey_df.columns:
+            avg_mood = survey_df["Rate your overall mood (1–5)"].mean()
+            st.metric("🌤️ Average Mood Score", round(avg_mood, 2))
+            st.subheader("Mood Score Distribution")
+            fig, ax = plt.subplots()
+            sns.histplot(survey_df["Rate your overall mood (1–5)"], bins=5, ax=ax)
+            st.pyplot(fig)
+        if "What are you struggling with lately?" in survey_df.columns:
+            text = " ".join(survey_df["What are you struggling with lately?"].dropna())
+            wc = WordCloud(width=800, height=400, background_color='white').generate(text)
+            st.subheader("🧠 Common Concerns")
+            st.image(wc.to_array())
 
-    if "Rate your overall mood (1–5)" in survey_df.columns:
-        avg_mood = survey_df["Rate your overall mood (1–5)"].mean()
-        st.metric("🌤️ Average Mood Score", round(avg_mood, 2))
+elif app_mode == "🎯 Extended Features":
+    st.title("✨ Extended Features")
+    if extended_features:
+        extended_features.show_extended_features()
+    else:
+        st.warning("Extended features module not found.")
 
-        st.subheader("Mood Score Distribution")
-        fig, ax = plt.subplots()
-        sns.histplot(survey_df["Rate your overall mood (1–5)"], bins=5, ax=ax)
-        st.pyplot(fig)
-
-    if "What are you struggling with lately?" in survey_df.columns:
-        text = " ".join(survey_df["What are you struggling with lately?"].dropna())
-        wc = WordCloud(width=800, height=400, background_color='white').generate(text)
-        st.subheader("🧠 Common Concerns")
-        st.image(wc.to_array())
