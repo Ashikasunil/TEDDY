@@ -1,4 +1,4 @@
-pip install matplotlib wordcloud seaborn textblob scikit-learn
+
 # Must be the first Streamlit command
 import streamlit as st
 st.set_page_config(page_title="Mental Health Assistant", layout="centered")
