@@ -1,6 +1,6 @@
 import streamlit as st
 
-# Navigation menu
+# Sidebar Navigation
 st.sidebar.title("🧭 Navigation")
 app_mode = st.sidebar.radio("Choose a section", [
     "Home",
@@ -11,27 +11,33 @@ app_mode = st.sidebar.radio("Choose a section", [
     "🎯 Extended Features"
 ])
 
-if app_mode == "🎯 Extended Features":
-    import extended_features  # this runs extended_features.py
-
+# Sections
 if app_mode == "Home":
-    st.title("Welcome to the Mental Health Assistant")
+    st.title("🏠 Welcome to the Mental Health Assistant")
     st.write("Select a feature from the sidebar to begin.")
 
 elif app_mode == "Chatbot + Sentiment":
-    # Your original chatbot/sentiment code here
+    st.title("💬 Chatbot and Sentiment Analysis")
+    # Add your chatbot code here (or import a file)
 
 elif app_mode == "Mood Timeline":
-    # Your timeline code here
+    st.title("📈 Mood Timeline Visualization")
+    # Add timeline code or placeholder
+    st.info("Mood timeline feature under construction.")
 
 elif app_mode == "Chat History":
-    # Your chat history log code here
+    st.title("📜 Chat History Log")
+    # Add chat history code or placeholder
+    st.info("Chat history feature coming soon.")
 
 elif app_mode == "Survey Analysis":
-    # Your Google Form analysis code here
+    st.title("📊 Survey Results")
+    # Add your Google Form data analysis code
+    st.info("Survey analysis not yet implemented.")
 
 elif app_mode == "🎯 Extended Features":
-    import extended_features  # NEW MODULE
+    import extended_features  # This imports your added module
+
 import streamlit as st
 from textblob import TextBlob
 import random
