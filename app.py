@@ -1,4 +1,15 @@
 import streamlit as st
+import pandas as pd
+import matplotlib.pyplot as plt
+# (other imports...)
+
+# ✅ This must be FIRST
+st.set_page_config(page_title="Mental Health Assistant", layout="centered")
+
+# Then your Streamlit UI setup
+st.sidebar.title("🧭 Navigation")
+app_mode = st.sidebar.radio("Choose a section", [...])
+import streamlit as st
 
 # Sidebar Navigation
 st.sidebar.title("🧭 Navigation")
