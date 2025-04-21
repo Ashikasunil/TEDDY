@@ -168,5 +168,11 @@ elif app_mode == "🎯 Extended Features":
     else:
         st.warning("Extended features module not found.")
 
+from caretaker_module import caretaker_assistant
+
+if selected == "Caretaker Assistant":
+    caretaker_assistant()
+
+
 
 
