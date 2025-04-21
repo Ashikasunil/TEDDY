@@ -2,6 +2,22 @@
 # Must be the first Streamlit command
 import streamlit as st
 st.set_page_config(page_title="Mental Health Assistant", layout="centered")
+page = st.sidebar.selectbox(
+    "Select a feature", 
+    ["Home", "Chatbot", "Survey Analysis", "Mood Timeline", "Extended Features", "Caretaker Assistant"]
+)
+if page == "Chatbot":
+    chatbot()
+elif page == "Survey Analysis":
+    survey_analysis()
+elif page == "Mood Timeline":
+    mood_timeline()
+elif page == "Extended Features":
+    extended_features()
+elif page == "Caretaker Assistant":
+    caretaker_assistant()
+
+from caretaker_module import caretaker_assistant
 
 # Other imports
 import pandas as pd
@@ -168,10 +184,7 @@ elif app_mode == "🎯 Extended Features":
     else:
         st.warning("Extended features module not found.")
 
-from caretaker_module import caretaker_assistant
 
-if selected == "Caretaker Assistant":
-    caretaker_assistant()
 
 
 
