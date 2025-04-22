@@ -2,24 +2,20 @@
 # Must be the first Streamlit command
 import streamlit as st
 st.set_page_config(page_title="Mental Health Assistant", layout="centered")
-page = st.sidebar.selectbox(
-    "Select a feature", 
-    ["Home", "Chatbot", "Survey Analysis", "Mood Timeline", "Extended Features", "Caretaker Assistant"]
-)
-if page == "Chatbot":
-    chatbot()
-elif page == "Survey Analysis":
-    survey_analysis()
-elif page == "Mood Timeline":
-    mood_timeline()
-elif page == "Extended Features":
-    extended_features()
-elif page == "Caretaker Assistant":
-    caretaker_assistant()
 
-from caretaker_module import caretaker_assistant
+# Sidebar navigation
+st.sidebar.title("🧭 Navigation")
+app_mode = st.sidebar.radio("Choose a section", [
+    "Home",
+    "Chatbot + Sentiment",
+    "Mood Timeline",
+    "Chat History",
+    "Survey Analysis",
+    "🎯 Extended Features",
+    "🧠 Caretaker Assistant"
+])
 
-# Other imports
+# Imports
 import pandas as pd
 import numpy as np
 from datetime import datetime
@@ -31,11 +27,16 @@ import random
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 
-# Optional import (if exists)
+# Import modules
 try:
     import extended_features
 except:
     extended_features = None
+
+try:
+    from caretaker_module import caretaker_assistant
+except:
+    caretaker_assistant = None
 
 # --- Intent Model Setup ---
 intent_data = {
@@ -109,17 +110,7 @@ def process_input(text):
     })
     return f"[{label}] {response}", intent
 
-# --- Streamlit App UI ---
-st.sidebar.title("🧭 Navigation")
-app_mode = st.sidebar.radio("Choose a section", [
-    "Home",
-    "Chatbot + Sentiment",
-    "Mood Timeline",
-    "Chat History",
-    "Survey Analysis",
-    "🎯 Extended Features"
-])
-
+# --- Streamlit Pages ---
 if app_mode == "Home":
     st.title("🏠 Welcome to the Mental Health Assistant")
     st.write("Select a feature from the sidebar to begin your personalized mental wellness journey.")
@@ -174,15 +165,18 @@ elif app_mode == "Survey Analysis":
             st.image(wc.to_array())
 
 elif app_mode == "🎯 Extended Features":
-    import extended_features
-    extended_features.run()
-
-elif app_mode == "🎯 Extended Features":
     st.title("✨ Extended Features")
     if extended_features:
         extended_features.show_extended_features()
     else:
         st.warning("Extended features module not found.")
+
+elif app_mode == "🧠 Caretaker Assistant":
+    st.title("🧠 Smart Caretaker Assistant")
+    if caretaker_assistant:
+        caretaker_assistant()
+    else:
+        st.warning("Caretaker assistant module not found.")
 
 
 
