@@ -47,7 +47,7 @@ emotion_activities = {
 }
 
 # ---------------- Streamlit UI ----------------
-def run():
+def show_extended_features():
     st.title("💬 Extended Features: Emotion Helper & Dialogue Bot")
 
     user_input = st.text_input("Talk to me 🙂")
@@ -71,4 +71,5 @@ def run():
         st.subheader("🎵 Mood-Based Activities for You")
         for act in emotion_activities[emotion]:
             st.markdown(f"- {act}")
+
 
